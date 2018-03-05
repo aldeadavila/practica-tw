@@ -20,7 +20,7 @@ public class ApplicationInitilizeListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        LOGGER.debug("initializing..");
+        LOGGER.debug("initiaLIizing..");
         WebApplicationContext ctx = WebApplicationContextUtils
                 .getWebApplicationContext(sce.getServletContext());
         PersonRepository personRepository = ctx.getBean(PersonRepository.class);
