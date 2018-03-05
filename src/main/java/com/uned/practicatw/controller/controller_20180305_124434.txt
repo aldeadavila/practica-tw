@@ -1,0 +1,5 @@
+WARNING - 12:44:34: First conversion pass
+ERROR - 12:44:34: java.io.FileNotFoundException: /practicatw/src/main/java/com/uned/practicatw/controller/HomeController.java (No existe el archivo o el directorio)
+ERROR - 12:44:34: java.io.FileNotFoundException: /practicatw/src/main/java/com/uned/practicatw/controller/HomeController.java (No existe el archivo o el directorio)
+WARNING - 12:44:46: First conversion pass
+ERROR - 12:44:46: java.net.MalformedURLException: unknown protocol: pathmap
