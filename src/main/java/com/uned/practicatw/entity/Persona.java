@@ -2,10 +2,11 @@ package com.uned.practicatw.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -15,54 +16,75 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "PERSONAS")
 public class Persona implements Serializable {
-    private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "PERSONA_ID")
     @GeneratedValue
-    private Integer persona_id;
+    private Integer id;
     
-    @Column(name = "PERFIL")
-    @GeneratedValue
-    private Integer perfil;
 
-    @Column(name = "NOMBRE")
+    @ManyToOne
+    @JoinColumn(name = "perfil")
+    private Perfil perfil;
+
     @Size(min = 1, max = 30)
     @NotNull
     private String nombre;
 
-    @Column(name = "EDAD")
     @Min(1)
     @Max(200)
     @NotNull
     private Integer edad;
+    
+    public Persona() {
+		super();
+	}
 
-    public Integer getId() {
-        return persona_id;
-    }
+	public Persona(Perfil perfil, String nombre, Integer edad) {
+		super();
+		this.perfil = perfil;
+		this.nombre = nombre;
+		this.edad = edad;
+	}
 
-    public void setId(Integer id) {
-        this.persona_id = id;
-    }
 
-    public String getName() {
-        return nombre;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.nombre = name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getAge() {
-        return edad;
-    }
+	public Perfil getPerfil() {
+		return perfil;
+	}
 
-    public void setAge(Integer age) {
-        this.edad = age;
-    }
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
 
-    @Override
-    public String toString() {
-        return "Person [id=" + persona_id + ", nombre=" + nombre + ", edad=" + edad + "]";
-    }
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", perfil=" + perfil + ", nombre=" + nombre + ", edad=" + edad + "]";
+	}
+
+    
 }

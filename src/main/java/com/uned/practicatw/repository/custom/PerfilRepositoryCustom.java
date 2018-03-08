@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import com.uned.practicatw.entity.Perfil;
 
 public interface PerfilRepositoryCustom {
-	Page<Perfil> findByNameLike(String name, Pageable pageable);
+	//Page<Perfil> findByNameLike(String name, Pageable pageable);
 }

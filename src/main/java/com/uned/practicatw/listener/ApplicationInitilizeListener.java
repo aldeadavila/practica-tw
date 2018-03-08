@@ -15,6 +15,7 @@ import com.uned.practicatw.entity.Perfil;
 import com.uned.practicatw.entity.Persona;
 import com.uned.practicatw.repository.PerfilRepository;
 import com.uned.practicatw.repository.PersonaRepository;
+import com.uned.practicatw.utils.Util;
 
 public class ApplicationInitilizeListener implements ServletContextListener {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationInitilizeListener.class);
@@ -50,10 +51,16 @@ public class ApplicationInitilizeListener implements ServletContextListener {
 
 		int itemCount = 100;
 		int chunkSize = 25;
-		for (int i = 1; i <= itemCount; i++) {
+		Persona salaDeCine = new Persona(Util.SALA_DE_CINE, "Sala de cine", 25);
+		persons.add(salaDeCine);
+		Persona anonima = new Persona(Util.USUARIO_NO_REGISTRADO, "Usuario no registrado", 25);
+		persons.add(anonima);
+		for (int i = 2; i <= itemCount; i++) {
+			
 			Persona p = new Persona();
-			p.setAge((i % 100) + 1);
-			p.setName("name" + i);
+			p.setEdad((i % 100) + 1);
+			p.setNombre("name" + i);
+			p.setPerfil(Util.CLIENTE);
 			persons.add(p);
 			if ((i % chunkSize) == 0) {
 				personRepository.save(persons);

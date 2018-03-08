@@ -1,9 +1,10 @@
 package com.uned.practicatw.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,30 +20,36 @@ public class Perfil implements Serializable{
 	private static final long serialVersionUID = 771502648623102367L;
 	
 	 	@Id
-	    @Column(name = "PERFIL_ID")
 	    @GeneratedValue
-	    private Integer perfil_id;
+	    private Integer id;
 
-	    @Column(name = "nombre")
 	    @Size(min = 1, max = 30)
 	    @NotNull
 	    private String nombre;
 	    
-	    @OneToMany(mappedBy="perfil")
-	    private List<Persona> personas;
+	    @OneToMany(
+	            mappedBy = "perfil", 
+	            cascade = CascadeType.ALL, 
+	            orphanRemoval = true
+	        )
+	    private List<Persona> personas = new ArrayList<Persona>();
+	    
+	    public Perfil() {
+	    	super();
+	    }
 	    
 	    public Perfil(Integer perfil_id, String nombre) {
 			super();
-			this.perfil_id = perfil_id;
+			this.id = perfil_id;
 			this.nombre = nombre;
 		}
 
 		public Integer getPerfil_id() {
-			return perfil_id;
+			return id;
 		}
 
 		public void setPerfil_id(Integer perfil_id) {
-			this.perfil_id = perfil_id;
+			this.id = perfil_id;
 		}
 
 		public String getNombre() {

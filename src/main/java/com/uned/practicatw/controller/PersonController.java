@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uned.practicatw.entity.Persona;
-import com.uned.practicatw.service.PersonService;
+import com.uned.practicatw.service.PersonaService;
 
 @Controller
 @RequestMapping("/person")
@@ -25,7 +25,7 @@ public class PersonController {
     protected static final int DEFAULT_PAGE_SIZE = 5;
 
     @Inject
-    protected PersonService personService;
+    protected PersonaService personaService;
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(PersonController.class);
@@ -35,7 +35,7 @@ public class PersonController {
             @RequestParam(value = "page", required = false) Integer page,
             Model model) {
         int pageNum = page != null ? page : DEFAULT_PAGE_NUM;
-        Page<Persona> paging = personService.findAll(pageNum, DEFAULT_PAGE_SIZE);
+        Page<Persona> paging = personaService.findAll(pageNum, DEFAULT_PAGE_SIZE);
         model.addAttribute("page", paging);
         return "/person/list";
     }
@@ -56,13 +56,13 @@ public class PersonController {
             model.addAllAttributes(bindingResult.getModel());
             return "/person/form";
         }
-        personService.insert(person);
+        personaService.insert(person);
         return "redirect:/person/list";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Integer id, Model model) {
-        Persona person = personService.findById(id);
+        Persona person = personaService.findById(id);
         model.addAttribute(person);
         return "/person/form";
     }
@@ -76,7 +76,7 @@ public class PersonController {
             model.addAllAttributes(bindingResult.getModel());
             return "/person/form";
         }
-        personService.update(person);
+        personaService.update(person);
         return "redirect:/person/list";
     }
 
@@ -85,7 +85,7 @@ public class PersonController {
             @RequestParam(value = "page", required = false) Integer page,
             @PathVariable("id") Integer id) {
         LOGGER.debug("delete id={}", id);
-        personService.deleteById(id);
+        personaService.deleteById(id);
 
         return "redirect:/person/list";
     }

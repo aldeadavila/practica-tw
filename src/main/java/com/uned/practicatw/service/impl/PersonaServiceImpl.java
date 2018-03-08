@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.uned.practicatw.entity.Persona;
 import com.uned.practicatw.repository.PersonaRepository;
-import com.uned.practicatw.service.PersonService;
+import com.uned.practicatw.service.PersonaService;
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class PersonaServiceImpl implements PersonaService {
     @Inject
     protected PersonaRepository personRepository;
 
@@ -30,11 +30,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Persona> findByNameLike(String name, int page, int size) {
+    public Page<Persona> findByNombreLike(String name, int page, int size) {
         Pageable pageable = new PageRequest(page, size, new Sort(
                 Direction.DESC, "id"));
         String q = "%" + name + "%";
-        Page<Persona> persons = personRepository.findByNameLike(q, pageable);
+        Page<Persona> persons = personRepository.findByNombreLike(q, pageable);
         return persons;
     }
 
