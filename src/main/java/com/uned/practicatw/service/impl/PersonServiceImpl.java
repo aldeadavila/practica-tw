@@ -10,50 +10,50 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uned.practicatw.entity.Person;
-import com.uned.practicatw.repository.PersonRepository;
+import com.uned.practicatw.entity.Persona;
+import com.uned.practicatw.repository.PersonaRepository;
 import com.uned.practicatw.service.PersonService;
 
 @Service
 public class PersonServiceImpl implements PersonService {
     @Inject
-    protected PersonRepository personRepository;
+    protected PersonaRepository personRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Person> findAll(int page, int size) {
+    public Page<Persona> findAll(int page, int size) {
         Pageable pageable = new PageRequest(page, size, new Sort(
                 Direction.DESC, "id"));
-        Page<Person> persons = personRepository.findAll(pageable);
+        Page<Persona> persons = personRepository.findAll(pageable);
         return persons;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Person> findByNameLike(String name, int page, int size) {
+    public Page<Persona> findByNameLike(String name, int page, int size) {
         Pageable pageable = new PageRequest(page, size, new Sort(
                 Direction.DESC, "id"));
         String q = "%" + name + "%";
-        Page<Person> persons = personRepository.findByNameLike(q, pageable);
+        Page<Persona> persons = personRepository.findByNameLike(q, pageable);
         return persons;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Person findById(Integer id) {
-        Person person = personRepository.findOne(id);
+    public Persona findById(Integer id) {
+        Persona person = personRepository.findOne(id);
         return person;
     }
 
     @Override
     @Transactional
-    public Person insert(Person person) {
+    public Persona insert(Persona person) {
         return personRepository.save(person);
     }
 
     @Override
     @Transactional
-    public Person update(Person person) {
+    public Persona update(Persona person) {
         return personRepository.save(person);
     }
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uned.practicatw.entity.Person;
+import com.uned.practicatw.entity.Persona;
 import com.uned.practicatw.service.PersonService;
 
 @Controller
@@ -35,20 +35,20 @@ public class PersonController {
             @RequestParam(value = "page", required = false) Integer page,
             Model model) {
         int pageNum = page != null ? page : DEFAULT_PAGE_NUM;
-        Page<Person> paging = personService.findAll(pageNum, DEFAULT_PAGE_SIZE);
+        Page<Persona> paging = personService.findAll(pageNum, DEFAULT_PAGE_SIZE);
         model.addAttribute("page", paging);
         return "/person/list";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public @ModelAttribute
-    Person create(Model model) {
-        Person person = new Person();
+    Persona create(Model model) {
+        Persona person = new Persona();
         return person;
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String createOnSubmit(@Valid Person person,
+    public String createOnSubmit(@Valid Persona person,
             BindingResult bindingResult, Model model) {
         LOGGER.debug("create person={}", person);
         if (bindingResult.hasErrors()) {
@@ -62,13 +62,13 @@ public class PersonController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Integer id, Model model) {
-        Person person = personService.findById(id);
+        Persona person = personService.findById(id);
         model.addAttribute(person);
         return "/person/form";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editOnSubmit(@Valid Person person,
+    public String editOnSubmit(@Valid Persona person,
             BindingResult bindingResult, Model model) {
         LOGGER.debug("edit person={}", person);
         if (bindingResult.hasErrors()) {

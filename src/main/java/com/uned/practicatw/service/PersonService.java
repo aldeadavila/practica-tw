@@ -2,18 +2,18 @@ package com.uned.practicatw.service;
 
 import org.springframework.data.domain.Page;
 
-import com.uned.practicatw.entity.Person;
+import com.uned.practicatw.entity.Persona;
 
 public interface PersonService {
-    Page<Person> findAll(int page, int size);
+    Page<Persona> findAll(int page, int size);
 
-    Page<Person> findByNameLike(String name, int page, int size);
+    Page<Persona> findByNameLike(String name, int page, int size);
 
-    Person findById(Integer id);
+    Persona findById(Integer id);
 
-    Person insert(Person person);
+    Persona insert(Persona person);
 
-    Person update(Person person);
+    Persona update(Persona person);
 
     void deleteById(Integer id);
 

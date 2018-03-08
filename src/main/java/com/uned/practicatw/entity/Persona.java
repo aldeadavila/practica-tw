@@ -13,52 +13,56 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "T_PERSON")
-public class Person implements Serializable {
+@Table(name = "PERSONAS")
+public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "PERSON_ID")
+    @Column(name = "PERSONA_ID")
     @GeneratedValue
-    private Integer id;
+    private Integer persona_id;
+    
+    @Column(name = "PERFIL")
+    @GeneratedValue
+    private Integer perfil;
 
-    @Column(name = "PERSON_NAME")
+    @Column(name = "NOMBRE")
     @Size(min = 1, max = 30)
     @NotNull
-    private String name;
+    private String nombre;
 
-    @Column(name = "AGE")
+    @Column(name = "EDAD")
     @Min(1)
     @Max(200)
     @NotNull
-    private Integer age;
+    private Integer edad;
 
     public Integer getId() {
-        return id;
+        return persona_id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.persona_id = id;
     }
 
     public String getName() {
-        return name;
+        return nombre;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nombre = name;
     }
 
     public Integer getAge() {
-        return age;
+        return edad;
     }
 
     public void setAge(Integer age) {
-        this.age = age;
+        this.edad = age;
     }
 
     @Override
     public String toString() {
-        return "Person [id=" + id + ", name=" + name + ", age=" + age + "]";
+        return "Person [id=" + persona_id + ", nombre=" + nombre + ", edad=" + edad + "]";
     }
 }
