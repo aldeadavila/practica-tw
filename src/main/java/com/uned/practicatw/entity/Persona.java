@@ -1,11 +1,16 @@
 package com.uned.practicatw.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -36,6 +41,16 @@ public class Persona implements Serializable {
     @Max(200)
     @NotNull
     private Integer edad;
+    
+    @ManyToMany(cascade = { 
+    	    CascadeType.PERSIST, 
+    	    CascadeType.MERGE
+    	})
+    	@JoinTable(name = "personas_pagos",
+    	    joinColumns = @JoinColumn(name = "persona_id"),
+    	    inverseJoinColumns = @JoinColumn(name = "pagos_id")
+    	)
+    	private Set<Pagos> pagos = new HashSet<Pagos>();
     
     public Persona() {
 		super();
